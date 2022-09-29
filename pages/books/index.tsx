@@ -39,15 +39,15 @@ const Books: FC<BooksProps> = ({ books }) => {
     [setLanguageParams]
   )
 
-  return isLoading ? (
-    <Preloader />
-  ) : (
+  return (
     <div className="px-10 tablet:px-20 pt-10 w-full">
       <Back href={"/"} name={"Back to home"} />
       <h1 className="text-center text-4xl">Books list</h1>
       <Search searchBook={searchBook} />
       <Checkboxes setLanguage={setLanguage} languages={languageParams} />
-      {books.length ? (
+      {isLoading ? (
+        <Preloader />
+      ) : books.length ? (
         <ul className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-2.5">
           {books.map((book) => (
             <Book
