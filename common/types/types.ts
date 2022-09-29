@@ -1,10 +1,3 @@
-export type ResponseBooksType = {
-  count: number
-  next: string
-  previous?: any
-  results: BookType[]
-}
-
 export type BookType = {
   id: number
   title: string

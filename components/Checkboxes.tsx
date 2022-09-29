@@ -1,28 +1,47 @@
-import React, { ChangeEvent, FC } from "react"
+import React, { ChangeEvent, FC, memo } from "react"
+import { LanguagesType } from "../pages/books"
+import Checkbox from "./Checkbox"
 
-export const Checkbox: FC<CheckboxProps> = ({ name, language, setLanguage }) => {
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+export const Checkboxes: FC<CheckboxProps> = memo(({ languages, setLanguage }) => {
+  const onChangeHandler = (language: LanguagesType, e: ChangeEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
-      setLanguage(language)
+      setLanguage(language, true)
     } else {
-      setLanguage("en")
+      setLanguage(language, false)
     }
   }
 
   return (
-    <label className="mr-3">
-      <input className="cursor-pointer" type={"checkbox"} onChange={onChangeHandler} />
-      <span className="ml-1">{name}</span>
-      <input className="cursor-pointer" type={"checkbox"} onChange={onChangeHandler} />
-      <span className="ml-1">{name}</span>
-      <input className="cursor-pointer" type={"checkbox"} onChange={onChangeHandler} />
-      <span className="ml-1">{name}</span>
-    </label>
+    <div className="my-4">
+      <Checkbox
+        name={"En"}
+        language={"en"}
+        languages={languages}
+        onChangeHandler={onChangeHandler}
+      />
+      <Checkbox
+        name={"Fi"}
+        language={"fi"}
+        languages={languages}
+        onChangeHandler={onChangeHandler}
+      />
+      <Checkbox
+        name={"Fr"}
+        language={"fr"}
+        languages={languages}
+        onChangeHandler={onChangeHandler}
+      />
+      <Checkbox
+        name={"Ru"}
+        language={"ru"}
+        languages={languages}
+        onChangeHandler={onChangeHandler}
+      />
+    </div>
   )
-}
+})
 
 type CheckboxProps = {
-  name: string
-  language: string
-  setLanguage: (language: string) => void
+  languages: LanguagesType[]
+  setLanguage: (language: LanguagesType, isSet: boolean) => void
 }

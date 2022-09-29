@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC } from "react"
 import { LanguagesType } from "../pages/books"
 
-const InputCheckbox: FC<InputCheckbox> = ({ name, language, languages, onChangeHandler }) => {
+const Checkbox: FC<InputCheckbox> = ({ name, language, languages, onChangeHandler }) => {
   return (
     <label className="mr-3">
       <input
@@ -15,7 +15,7 @@ const InputCheckbox: FC<InputCheckbox> = ({ name, language, languages, onChangeH
   )
 }
 
-export default InputCheckbox
+export default Checkbox
 
 type InputCheckbox = {
   name: string

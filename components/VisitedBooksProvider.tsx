@@ -1,10 +1,8 @@
-import React, { useState } from "react"
+import React, { createContext, FC, useState } from "react"
 
-import { createContext } from "react"
+export const VisitedBooksCtx = createContext({} as VisitedBooksContextType)
 
-export const AppCtx = createContext<AppContextType | null>(null)
-
-const VisitedBooksContext = ({ children }: any) => {
+const VisitedBooksProvider: FC<VisitedBooksProviderProps> = ({ children }) => {
   const [visitedBooks, setVisitedBooks] = useState<number[]>([])
 
   const addVisitedBooks = (id: number) => {
@@ -13,12 +11,20 @@ const VisitedBooksContext = ({ children }: any) => {
     }
   }
 
-  return <AppCtx.Provider value={{ visitedBooks, addVisitedBooks }}>{children}</AppCtx.Provider>
+  return (
+    <VisitedBooksCtx.Provider value={{ visitedBooks, addVisitedBooks }}>
+      {children}
+    </VisitedBooksCtx.Provider>
+  )
 }
 
-export default VisitedBooksContext
+export default VisitedBooksProvider
 
-type AppContextType = {
+type VisitedBooksContextType = {
   visitedBooks: number[]
   addVisitedBooks: (id: number) => void
+}
+
+type VisitedBooksProviderProps = {
+  children: React.ReactNode
 }
